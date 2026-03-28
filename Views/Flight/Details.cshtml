@@ -1,0 +1,22 @@
+@* --- FORM ĐIỀU HƯỚNG SANG TRANG NHẬP THÔNG TIN --- *@
+<form asp-controller="Account" asp-action="Checkout" method="get">
+    <input type="hidden" name="flightCode" value="@Model.FlightNumber" />
+    <input type="hidden" name="amount" value="@Model.Price" />
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="javascript:history.back()" class="btn btn-outline-secondary px-4">Quay lại</a>
+        
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <button type="submit" class="btn btn-warning text-white fw-bold px-5">
+                THANH TOÁN NGAY
+            </button>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-warning text-white fw-bold px-5">
+                ĐĂNG KÝ ĐỂ THANH TOÁN
+            </a>
+        }
+    </div>
+</form>

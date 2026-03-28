@@ -1,0 +1,6 @@
+    SELECT TOP (1000) [Id]
+      ,[FullName]
+      ,[Email]
+      ,[PhoneNumber]
+      ,[Password]
+  FROM [FlightDB].[dbo].[Users]

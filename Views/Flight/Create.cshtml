@@ -1,0 +1,23 @@
+@model FlightBooking.Models.Flight
+
+<h2>Thêm chuyến bay</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input asp-for="FromCity" placeholder="From" />
+    <span asp-validation-for="FromCity"></span>
+
+    <input asp-for="ToCity" placeholder="To" />
+    <span asp-validation-for="ToCity"></span>
+
+    <input asp-for="DepartureTime" type="datetime-local" />
+    <span asp-validation-for="DepartureTime"></span>
+
+    <input asp-for="Price" type="number" />
+    <span asp-validation-for="Price"></span>
+
+    <button type="submit">Save</button>
+</form>

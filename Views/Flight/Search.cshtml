@@ -1,0 +1,79 @@
+@model IEnumerable<FlightBooking.Models.FlightViewModel>
+
+@{
+    ViewData["Title"] = "Kết quả tìm kiếm chuyến bay";
+}
+
+<div class="container mt-5">
+    @* Phần tiêu đề hiển thị chặng bay *@
+    <div class="p-4 bg-light rounded-3 shadow-sm mb-4">
+        <h3 class="fw-bold text-dark">
+            Chuyến bay từ <span class="text-primary">@ViewBag.From</span> 
+            đến <span class="text-primary">@ViewBag.To</span>
+        </h3>
+        <p class="text-muted mb-0">Chọn chuyến bay phù hợp với nhu cầu của bạn</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var flight in Model)
+        {
+            <div class="card mb-3 border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+                <div class="card-body p-4">
+                    <div class="row align-items-center text-center">
+                        
+                        @* Thông tin hãng bay *@
+                        <div class="col-md-3 text-start">
+                            <h5 class="fw-bold mb-0 text-primary">@flight.Airline</h5>
+                            <small class="text-muted">Số hiệu: @flight.FlightNumber</small>
+                        </div>
+                        
+                        @* Giờ đi *@
+                        <div class="col-md-2">
+                            <div class="fs-4 fw-bold">@flight.DepartureTime</div>
+                            <div class="text-secondary small">@flight.From</div>
+                        </div>
+
+                        @* Đồ họa máy bay *@
+                        <div class="col-md-2 text-muted">
+                            <i class="fas fa-plane"></i>
+                            <hr class="my-1" style="border-top: 2px dashed #ccc;">
+                            <small>Bay thẳng</small>
+                        </div>
+
+                        @* Giờ đến *@
+                        <div class="col-md-2">
+                            <div class="fs-4 fw-bold">@flight.ArrivalTime</div>
+                            <div class="text-secondary small">@flight.To</div>
+                        </div>
+
+                        @* Giá vé và Nút chọn *@
+                        <div class="col-md-3 text-end">
+                            <div class="text-danger fs-4 fw-bold mb-2">
+                                @flight.Price.ToString("N0") VNĐ
+                            </div>
+                            
+                            @* Nút này sẽ dẫn đến Action Details trong FlightController *@
+                            <a asp-controller="Flight" 
+                               asp-action="Details" 
+                               asp-route-id="@flight.FlightNumber" 
+                               class="btn btn-warning w-100 fw-bold text-white py-2 d-flex align-items-center justify-content-center" 
+                               style="border-radius: 8px;">
+                                Chọn chuyến bay
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning text-center p-5">
+            <i class="fas fa-search fa-3x mb-3"></i>
+            <h4>Không tìm thấy chuyến bay nào!</h4>
+            <p>Vui lòng thử lại với địa điểm hoặc thời gian khác.</p>
+            <a href="/" class="btn btn-outline-primary mt-2">Quay lại trang chủ</a>
+        </div>
+    }
+</div>

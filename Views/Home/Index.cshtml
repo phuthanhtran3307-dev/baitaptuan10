@@ -1,0 +1,54 @@
+﻿@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="search-card">
+            <h2 class="mb-4 fw-bold text-white">Đặt Vé Máy Bay Online</h2>
+            
+            <form asp-controller="Flight" asp-action="Search" method="get">
+                <div class="trip-type mb-3 text-white">
+                    <label class="me-3 cursor-pointer">
+                        <input type="radio" name="tripType" value="roundtrip" checked> Khứ hồi
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="tripType" value="oneway"> Một chiều
+                    </label>
+                </div>
+
+                <div class="row g-2 align-items-stretch">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="input-group-custom">
+                            <small><i class="fas fa-plane-departure me-1"></i> TỪ</small>
+                            <input type="text" name="searchFrom" class="form-control-plain" placeholder="Hồ Chí Minh (SGN)" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="input-group-custom">
+                            <small><i class="fas fa-plane-arrival me-1"></i> ĐẾN</small>
+                            <input type="text" name="searchTo" class="form-control-plain" placeholder="Hà Nội (HAN)" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-8">
+                        <div class="input-group-custom">
+                            <small><i class="far fa-calendar-alt me-1"></i> NGÀY ĐI</small>
+                            <input type="date" name="departureDate" class="form-control-plain">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <button type="submit" class="btn-search-orange h-100 w-100">
+                            Tìm chuyến bay
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

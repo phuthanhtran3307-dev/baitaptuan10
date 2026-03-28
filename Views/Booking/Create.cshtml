@@ -1,0 +1,14 @@
+@model FlightBooking.Models.Booking
+
+<h2>Đặt vé</h2>
+
+<form method="post">
+    @Html.LabelFor(model => model.FlightCode)
+
+    <div class="mb-3">
+        <label>Tên khách</label>
+        @Html.EditorFor(model => model.UserId)
+    </div>
+
+    <button class="btn btn-primary">Xác nhận</button>
+</form>

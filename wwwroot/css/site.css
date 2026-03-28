@@ -1,0 +1,139 @@
+/* Lớp nền phủ toàn màn hình */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                url('/images/maybay.jpg') no-repeat center center;
+    background-size: cover; /* Quan trọng: giúp ảnh không bị bể/hụt */
+    min-height: 450px;      /* Tăng chiều cao để thấy rõ ảnh máy bay */
+    display: flex;
+    align-items: center;    /* Căn giữa form theo chiều dọc */
+    justify-content: center;/* Căn giữa form theo chiều ngang */
+    padding: 20px;
+}
+
+/* Thẻ tìm kiếm màu tối, bo góc */
+.search-card {
+    background: rgba(33, 37, 41, 0.85); /* Độ mờ vừa phải để thấy ảnh nền phía sau */
+    padding: 30px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 1100px;      /* Giới hạn độ rộng của form */
+    backdrop-filter: blur(5px); /* Hiệu ứng mờ kính hiện đại */
+}
+
+/* Style cho các lựa chọn Khứ hồi / Một chiều */
+.trip-type label {
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Tùy chỉnh các ô nhập liệu bên trong card */
+.input-group-custom {
+    background: #1a1d20;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 1px solid #343a40;
+    height: 100%; /* Đảm bảo các ô cao bằng nhau */
+    transition: 0.3s;
+}
+
+.input-group-custom:focus-within {
+    border-color: #ff8c00; /* Đổi màu viền khi click vào */
+}
+
+.input-group-custom small {
+    display: block;
+    color: #adb5bd;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.form-control-plain {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+/* Nút tìm kiếm màu cam */
+.btn-search-orange {
+    background: linear-gradient(135deg, #ff8c00, #ff5e00);
+    color: white;
+    border: none;
+    width: 100%;
+    height: 100%;
+    min-height: 55px; /* Đảm bảo nút cao bằng các ô input */
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s transform;
+    cursor: pointer;
+}
+
+.btn-search-orange:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+}
+/* Màu nền xanh đậm của iVIVU */
+.custom-navbar {
+    background-color: #003c71;
+    padding: 10px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Cấu trúc Menu */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #00bee1; /* Màu xanh lơ khi hover hoặc đang ở trang đó */
+}
+
+/* Khu vực Hotline */
+.hotline-box {
+    text-align: right;
+    color: white;
+    line-height: 1.2;
+}
+
+.phone-number {
+    color: #ff8c00; /* Màu cam nổi bật */
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.phone-number i {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.working-hours {
+    font-size: 0.75rem;
+    color: #ddd;
+}
+
+/* Icon tài khoản */
+.user-account {
+    cursor: pointer;
+    font-size: 15px;
+}

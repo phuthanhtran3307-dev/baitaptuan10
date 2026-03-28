@@ -1,0 +1,40 @@
+@model FlightBooking.Models.User
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow border-0" style="border-radius: 20px; overflow: hidden;">
+                <div class="card-header bg-dark text-white text-center py-4">
+                    <img src="https://ui-avatars.com/api/?name=@Model.FullName&background=random&size=100" class="rounded-circle border border-3 border-white mb-2">
+                    <h3 class="fw-bold mb-0">HỒ SƠ CỦA BẠN</h3>
+                </div>
+                <div class="card-body p-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted">Họ tên:</span>
+                            <span class="fw-bold text-primary">@Model.FullName</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted">Email:</span>
+                            <span class="fw-bold">@Model.Email</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between py-3">
+                            <span class="text-muted">Số điện thoại:</span>
+                            <span class="fw-bold text-success">@Model.PhoneNumber</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between py-3 border-bottom-0">
+                            <span class="text-muted">Quyền hạn:</span>
+                            <span class="badge bg-warning text-dark">@Model.Role</span>
+                        </li>
+                    </ul>
+                    <div class="d-grid gap-2 mt-4">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary fw-bold" style="border-radius: 10px;">VỀ TRANG CHỦ</a>
+                        <form asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-outline-danger w-100 fw-bold" style="border-radius: 10px;">ĐĂNG XUẤT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

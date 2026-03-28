@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Thanh toán trực tuyến";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0" style="border-radius: 15px;">
+                <div class="card-header bg-primary text-white p-3 text-center">
+                    <h4 class="mb-0">Thông tin thanh toán</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-4 text-center">
+                        <p class="text-muted mb-1">Số tiền cần thanh toán</p>
+                        <h2 class="text-danger fw-bold">@ViewBag.Amount.ToString("N0") VNĐ</h2>
+                        <span class="badge bg-light text-dark border">Chuyến bay: @ViewBag.FlightCode</span>
+                    </div>
+
+                    <form asp-controller="Account" asp-action="ProcessPayment" method="post">
+                        <input type="hidden" name="flightCode" value="@ViewBag.FlightCode" />
+                        <input type="hidden" name="amount" value="@ViewBag.Amount" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên chủ thẻ</label>
+                            <input type="text" class="form-control" placeholder="NGUYEN VAN A" required style="text-transform: uppercase;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Số thẻ</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                                <input type="text" class="form-control" placeholder="0000 0000 0000 0000" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Ngày hết hạn</label>
+                                <input type="text" class="form-control" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Mã CVV</label>
+                                <input type="password" class="form-control" placeholder="***" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 fw-bold py-3" 
+                                onclick="return confirm('Xác nhận trừ tiền từ tài khoản thẻ?')">
+                            XÁC NHẬN THANH TOÁN
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

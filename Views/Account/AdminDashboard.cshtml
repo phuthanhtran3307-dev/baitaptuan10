@@ -1,0 +1,63 @@
+@using FlightBooking.Models
+@model IEnumerable<FlightBooking.Models.User>
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">Quản Lý Thành Viên (Database)</h2>
+        <span class="badge bg-dark">Tổng số: @(Model?.Count() ?? 0)</span>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>Họ Tên</th>
+                            <th>Email</th>
+                            <th>Số Điện Thoại</th>
+                            <th class="text-center">Quyền Hạn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4">@user.Id</td>
+                                    <td><strong>@user.FullName</strong></td>
+                                    <td>@user.Email</td>
+                                    <td>@user.PhoneNumber</td>
+                                    <td class="text-center">
+                                        @if (user.Role == "Admin")
+                                        {
+                                            <span class="badge bg-danger">Admin</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-primary">Customer</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <i class="bi bi-database-exclamation fs-2"></i>
+                                    <p class="mt-2">Chưa có dữ liệu người dùng trong hệ thống.</p>
+                                </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
