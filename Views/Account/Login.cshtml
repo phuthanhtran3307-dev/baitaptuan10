@@ -1,0 +1,44 @@
+@model FlightBooking.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow border-0" style="border-radius: 15px;">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="text-center fw-bold mb-4 text-primary">Đăng Nhập</h2>
+                    
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control shadow-sm" placeholder="name@example.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label fw-bold">Mật khẩu</label>
+                            <input asp-for="Password" class="form-control shadow-sm" type="password" placeholder="********" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow" style="border-radius: 8px;">
+                            ĐĂNG NHẬP
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0 text-muted">
+                            Chưa có tài khoản? 
+                            <a asp-controller="Account" asp-action="Register" class="text-primary fw-bold text-decoration-none">Đăng ký ngay</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

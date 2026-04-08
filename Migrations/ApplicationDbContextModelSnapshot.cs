@@ -33,12 +33,13 @@ namespace FlightBooking.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FlightCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
@@ -47,6 +48,10 @@ namespace FlightBooking.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -109,6 +114,23 @@ namespace FlightBooking.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FlightBooking.Models.Booking", b =>
+                {
+                    b.HasOne("FlightBooking.Models.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightId");
+
+                    b.HasOne("FlightBooking.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

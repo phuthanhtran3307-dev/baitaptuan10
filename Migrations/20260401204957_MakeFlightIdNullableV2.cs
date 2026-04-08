@@ -5,7 +5,7 @@
 namespace FlightBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalUpdateForAdminRole : Migration
+    public partial class MakeFlightIdNullableV2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

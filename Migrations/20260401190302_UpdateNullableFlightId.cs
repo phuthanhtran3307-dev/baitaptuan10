@@ -5,7 +5,7 @@
 namespace FlightBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRoleColumnToUserFinal : Migration
+    public partial class UpdateNullableFlightId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

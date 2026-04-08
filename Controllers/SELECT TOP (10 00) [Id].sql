@@ -1,0 +1,7 @@
+SELECT TOP (1000) [Id]
+      ,[UserId]
+      ,[FlightId]
+      ,[BookingDate]
+      ,[Status]
+      ,[TotalAmount]
+  FROM [FlightDB].[dbo].[Bookings]

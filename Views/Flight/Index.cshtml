@@ -1,38 +1,64 @@
-section class="hero-section">
+<section class="hero-section">
     <div class="search-card">
         <h2 class="mb-4" style="font-weight: 700;">Đặt Vé Máy Bay Online</h2>
         
-        <form method="get" action="/Flight">
+        @* Sửa action trỏ đúng đến Flight/Search *@
+        <form method="get" action="/Flight/Search">
             <div class="trip-type mb-3">
-                <label><input type="radio" name="trip" checked> Khứ hồi</label>
-                <label><input type="radio" name="trip"> Một chiều</label>
+                <label class="me-3"><input type="radio" name="tripType" value="round" checked> Khứ hồi</label>
+                <label><input type="radio" name="tripType" value="oneway"> Một chiều</label>
             </div>
 
             <div class="row g-2">
+                @* Điểm đi *@
                 <div class="col-lg-3 col-md-6">
-                    <div class="input-group-custom">
-                        <small>Từ</small>
-                        <input type="text" class="form-control-plain" placeholder="Hồ Chí Minh (SGN)">
+                    <div class="input-group-custom border rounded p-2 bg-white">
+                        <small class="d-block text-muted">Từ</small>
+                        <input type="text" name="from" class="form-control border-0 p-0" placeholder="Hồ Chí Minh (SGN)" required>
                     </div>
                 </div>
+
+                @* Điểm đến *@
                 <div class="col-lg-3 col-md-6">
-                    <div class="input-group-custom">
-                        <small>Đến</small>
-                        <input type="text" class="form-control-plain" placeholder="Hà Nội (HAN)">
+                    <div class="input-group-custom border rounded p-2 bg-white">
+                        <small class="d-block text-muted">Đến</small>
+                        <input type="text" name="to" class="form-control border-0 p-0" placeholder="Hà Nội (HAN)" required>
                     </div>
                 </div>
+
+                @* Ngày đi *@
                 <div class="col-lg-4 col-md-8">
-                    <div class="input-group-custom">
-                        <small>Ngày đi - Ngày về</small>
-                        <input type="text" class="form-control-plain" placeholder="23-03-2026 - 24-03-2026">
+                    <div class="input-group-custom border rounded p-2 bg-white">
+                        <small class="d-block text-muted">Ngày đi</small>
+                        @* Dùng type="date" để Controller nhận kiểu DateTime? tự động *@
+                        <input type="date" name="date" class="form-control border-0 p-0" required>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4">
-                    <button type="submit" class="btn-search-orange">
-                        Tìm chuyến bay
+
+                @* Nút tìm kiếm *@
+                <div class="col-lg-2 col-md-4 d-grid">
+                    <button type="submit" class="btn btn-warning fw-bold text-white shadow-sm" style="height: 100%; border-radius: 8px;">
+                        TÌM CHUYẾN BAY
                     </button>
                 </div>
             </div>
         </form>
     </div>
 </section>
+
+<style>
+    /* CSS hỗ trợ để giao diện giống search-card chuyên nghiệp */
+    .search-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    .input-group-custom:focus-within {
+        border-color: #ffc107 !important;
+        box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+    }
+    .form-control:focus {
+        box-shadow: none;
+    }
+</style>

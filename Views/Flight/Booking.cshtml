@@ -1,0 +1,33 @@
+@model IEnumerable<FlightBooking.Models.FlightViewModel>
+
+<div class="container mt-5">
+    <div class="d-flex align-items-center mb-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary me-3"><i class="fas fa-arrow-left"></i></a>
+        <h2 class="fw-bold mb-0">Chuyến bay tốt nhất đến @ViewBag.Location</h2>
+    </div>
+
+    @foreach (var flight in Model)
+    {
+        <div class="card mb-3 shadow-sm border-0 rounded-4 overflow-hidden border-start border-primary border-5">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="~/images/shin.jpg" class="rounded-circle shadow-sm" style="width: 50px; height: 50px;" alt="Logo">
+                        <div class="fw-bold mt-1">@flight.Airline</div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex justify-content-between align-items-center text-center px-3">
+                            <div><h4 class="fw-bold mb-0">@flight.DepartureTime</h4><small>@flight.From</small></div>
+                            <div class="flex-grow-1 mx-3 position-relative"><hr><i class="fas fa-plane text-primary position-absolute top-50 start-50 translate-middle bg-white px-2"></i></div>
+                            <div><h4 class="fw-bold mb-0">@flight.ArrivalTime</h4><small>@flight.To</small></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-end border-start">
+                        <h3 class="text-primary fw-bold mb-3">@flight.Price.ToString("N0")đ</h3>
+                        <button class="btn btn-warning w-100 fw-bold rounded-pill">CHỌN VÉ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

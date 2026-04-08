@@ -1,20 +1,22 @@
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlightBooking.Models;
 
 public class Flight
 {
     public int Id { get; set; }
-
-    [Required]
     public string FromCity { get; set; } = string.Empty;
-
-    [Required]
     public string ToCity { get; set; } = string.Empty;
-
-    [Required]
     public DateTime DepartureTime { get; set; }
-
-    [Required]
     public decimal Price { get; set; }
+
+    // Các cột này không có trong DB nên phải đánh dấu NotMapped
+    [NotMapped]
+    public string FlightNumber => "SH-" + Id;
+
+    [NotMapped]
+    public string Airline { get; set; } = "SHIN Airways";
+
+    [NotMapped]
+    public DateTime ArrivalTime => DepartureTime.AddHours(2);
 }

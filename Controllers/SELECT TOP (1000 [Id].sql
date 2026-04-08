@@ -1,0 +1,6 @@
+SELECT TOP (1000) [Id]
+      ,[FromCity]
+      ,[ToCity]
+      ,[DepartureTime]
+      ,[Price]
+  FROM [FlightDB].[dbo].[Flights]

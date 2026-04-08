@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FlightBooking.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ReCreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace FlightBooking.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ToCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FromCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ToCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -28,13 +28,33 @@ namespace FlightBooking.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FlightId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FlightId = table.Column<int>(type: "int", nullable: true),
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,6 +63,11 @@ namespace FlightBooking.Migrations
                         name: "FK_Bookings_Flights_FlightId",
                         column: x => x.FlightId,
                         principalTable: "Flights",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Bookings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -51,6 +76,11 @@ namespace FlightBooking.Migrations
                 name: "IX_Bookings_FlightId",
                 table: "Bookings",
                 column: "FlightId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_UserId",
+                table: "Bookings",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -61,6 +91,9 @@ namespace FlightBooking.Migrations
 
             migrationBuilder.DropTable(
                 name: "Flights");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

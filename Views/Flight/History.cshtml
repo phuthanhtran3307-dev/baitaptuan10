@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Lịch sử đặt vé @(User.IsInRole("Admin") ? "hệ thống" : "cá nhân")</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Mã đơn</th>
+                @if (User.IsInRole("Admin")) { 
+                    <th>Khách hàng</th> 
+                }
+                <th>Chuyến bay</th>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>#@item.Id</td>
+                @if (User.IsInRole("Admin")) {
+                    <td>@(item.User?.FullName ?? item.User?.Email ?? "N/A")</td>
+                }
+                <td>@(item.Flight != null ? item.Flight.FlightNumber : "VN-MOCK (Demo)")</td>
+                <td>@item.BookingDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@item.TotalAmount.ToString("N0") VND</td>
+                <td><span class="badge bg-success">@item.Status</span></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

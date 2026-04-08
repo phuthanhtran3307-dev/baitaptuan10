@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260328122308_UpdateUserRoleColumn")]
-    partial class UpdateUserRoleColumn
+    [Migration("20260401190302_UpdateNullableFlightId")]
+    partial class UpdateNullableFlightId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,15 +33,28 @@ namespace FlightBooking.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("FlightId")
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FlightId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -110,11 +123,17 @@ namespace FlightBooking.Migrations
                 {
                     b.HasOne("FlightBooking.Models.Flight", "Flight")
                         .WithMany()
-                        .HasForeignKey("FlightId")
+                        .HasForeignKey("FlightId");
+
+                    b.HasOne("FlightBooking.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Flight");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
