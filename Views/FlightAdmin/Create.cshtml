@@ -1,0 +1,71 @@
+@model FlightBooking.Models.Flight
+
+@{
+    ViewData["Title"] = "Thêm Chuyến bay mới";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0" style="border-radius: 15px;">
+                <div class="card-header bg-primary text-white py-3" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Thêm Chuyến bay mới</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FromCity" class="form-label fw-bold"></label>
+                                <input asp-for="FromCity" class="form-control" placeholder="Ví dụ: Hà Nội (HAN)" />
+                                <span asp-validation-for="FromCity" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ToCity" class="form-label fw-bold"></label>
+                                <input asp-for="ToCity" class="form-control" placeholder="Ví dụ: TP. Hồ Chí Minh (SGN)" />
+                                <span asp-validation-for="ToCity" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DepartureTime" class="form-label fw-bold"></label>
+                                <input asp-for="DepartureTime" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="DepartureTime" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="Price" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <input asp-for="Price" class="form-control" type="number" />
+                                    <span class="input-group-text">đ</span>
+                                </div>
+                                <span asp-validation-for="Price" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AvailableSeats" class="form-label fw-bold">Số ghế</label>
+                                <input asp-for="AvailableSeats" class="form-control" type="number" value="100" />
+                                <span asp-validation-for="AvailableSeats" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-arrow-left me-1"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary px-5 fw-bold">
+                                <i class="fas fa-save me-1"></i> Lưu chuyến bay
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

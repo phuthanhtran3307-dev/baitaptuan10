@@ -13,7 +13,7 @@ namespace FlightBooking.Models
         // Tên hãng hàng không
         public string Airline { get; set; } = string.Empty;
 
-        // Thời gian đi và đến (Bắt buộc kiểu DateTime để dùng được .ToString("HH:mm"))
+        // Thời gian đi và đến
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
 
@@ -24,11 +24,14 @@ namespace FlightBooking.Models
         public string From { get; set; } = string.Empty;
         public string To { get; set; } = string.Empty;
 
-        // Các thuộc tính bổ sung để khớp với logic lọc (Where) trong Controller
+        // Cột mới thêm để hết gạch đỏ và hiển thị số ghế thực tế
+        public int AvailableSeats { get; set; } 
+
+        // Các thuộc tính bổ sung để khớp với logic lọc
         public string FromCity { get; set; } = string.Empty;
         public string ToCity { get; set; } = string.Empty;
         
-        // Ngày khởi hành (Dùng để so sánh ngày trong hàm Search)
+        // Ngày khởi hành
         public DateTime DepartureDate { get; set; }
     }
 }

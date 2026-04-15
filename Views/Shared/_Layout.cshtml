@@ -72,15 +72,20 @@
                                     </li>
                                     
                                     @if (User.IsInRole("Admin"))
-                                    {
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li>
-                                            <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="Account" asp-action="AdminDashboard">
-                                                <i class="fas fa-user-shield me-2"></i>Quản trị hệ thống
-                                            </a>
-                                        </li>
-                                    }
-                                    
+{
+    <li><hr class="dropdown-divider"></li>
+    <li class="px-3 py-2 text-muted small">Quản lý hệ thống</li>
+    <li>
+        <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="FlightAdmin" asp-action="Index">
+            <i class="fas fa-plane-departure me-2"></i>Quản lý Chuyến bay
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="Account" asp-action="AdminDashboard">
+            <i class="fas fa-users-cog me-2"></i>Quản lý Người dùng
+        </a>
+    </li>
+}
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         @* Sử dụng Form Post cho Logout để đảm bảo an toàn CSRF *@

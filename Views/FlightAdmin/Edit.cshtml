@@ -1,0 +1,76 @@
+@model FlightBooking.Models.Flight
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Chuyến bay";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0" style="border-radius: 15px;">
+                <div class="card-header bg-warning text-dark py-3" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Chỉnh sửa Chuyến bay: @Model.FlightNumber</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FromCity" class="form-label fw-bold">Điểm đi</label>
+                                <input asp-for="FromCity" class="form-control" />
+                                <span asp-validation-for="FromCity" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ToCity" class="form-label fw-bold">Điểm đến</label>
+                                <input asp-for="ToCity" class="form-control" />
+                                <span asp-validation-for="ToCity" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DepartureTime" class="form-label fw-bold">Thời gian khởi hành</label>
+                                <input asp-for="DepartureTime" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="DepartureTime" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="Price" class="form-label fw-bold">Giá vé</label>
+                                <input asp-for="Price" class="form-control" type="number" />
+                                <span asp-validation-for="Price" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AvailableSeats" class="form-label fw-bold">Số ghế trống</label>
+                                <input asp-for="AvailableSeats" class="form-control" type="number" />
+                                <span asp-validation-for="AvailableSeats" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FlightNumber" class="form-label fw-bold">Số hiệu chuyến bay</label>
+                            <input asp-for="FlightNumber" class="form-control" />
+                            <span asp-validation-for="FlightNumber" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-arrow-left me-1"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-warning px-5 fw-bold text-dark">
+                                <i class="fas fa-save me-1"></i> Cập nhật thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
