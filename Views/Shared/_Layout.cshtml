@@ -29,7 +29,6 @@
                     <li><a asp-controller="Home" asp-action="Index" class="text-white text-decoration-none">Khách sạn</a></li>
                     <li><a asp-controller="Home" asp-action="Index" class="text-white text-decoration-none">Tours</a></li>
                     
-                    @* SỬA LỖI 404: Trỏ trực tiếp vào Search thay vì Index mặc định *@
                     <li>
                         <a asp-controller="Flight" asp-action="Search" class="text-white text-decoration-none fw-bold">
                             <i class="fas fa-plane me-1"></i> Vé máy bay
@@ -72,23 +71,30 @@
                                     </li>
                                     
                                     @if (User.IsInRole("Admin"))
-{
-    <li><hr class="dropdown-divider"></li>
-    <li class="px-3 py-2 text-muted small">Quản lý hệ thống</li>
-    <li>
-        <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="FlightAdmin" asp-action="Index">
-            <i class="fas fa-plane-departure me-2"></i>Quản lý Chuyến bay
-        </a>
-    </li>
-    <li>
-        <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="Account" asp-action="AdminDashboard">
-            <i class="fas fa-users-cog me-2"></i>Quản lý Người dùng
-        </a>
-    </li>
-}
+                                    {
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="px-3 py-2 text-muted small">Quản lý hệ thống</li>
+                                        
+                                        @* MỤC MỚI THÊM: Dashboard Thống kê *@
+                                        <li>
+                                            <a class="dropdown-item py-2 text-primary fw-bold" asp-controller="FlightAdmin" asp-action="Dashboard">
+                                                <i class="fas fa-chart-line me-2"></i>Báo cáo Thống kê
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="FlightAdmin" asp-action="Index">
+                                                <i class="fas fa-plane-departure me-2"></i>Quản lý Chuyến bay
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item py-2 text-warning fw-bold" asp-controller="Account" asp-action="AdminDashboard">
+                                                <i class="fas fa-users-cog me-2"></i>Quản lý Người dùng
+                                            </a>
+                                        </li>
+                                    }
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        @* Sử dụng Form Post cho Logout để đảm bảo an toàn CSRF *@
                                         <form asp-controller="Account" asp-action="Logout" method="post" class="px-3 py-1">
                                             <button type="submit" class="btn btn-outline-danger btn-sm w-100 fw-bold">
                                                 <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
@@ -117,7 +123,6 @@
 
     <div class="container-fluid p-0">
         <main role="main">
-            @* Thông báo hệ thống *@
             <div class="container mt-3">
                 @if (TempData["Success"] != null)
                 {

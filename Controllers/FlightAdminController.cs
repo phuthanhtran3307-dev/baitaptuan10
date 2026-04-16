@@ -44,16 +44,11 @@ namespace FlightBooking.Controllers
             return View(flight);
         }
 
-        // ==========================================
         // 4. CHỈNH SỬA CHUYẾN BAY (GET)
-        // ==========================================
         public async Task<IActionResult> Edit(int id)
         {
             var flight = await _context.Flights.FindAsync(id);
-            if (flight == null)
-            {
-                return NotFound();
-            }
+            if (flight == null) return NotFound();
             return View(flight);
         }
 
@@ -82,9 +77,7 @@ namespace FlightBooking.Controllers
             return View(flight);
         }
 
-        // ==========================================
         // 6. XÓA CHUYẾN BAY (POST)
-        // ==========================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
@@ -101,6 +94,44 @@ namespace FlightBooking.Controllers
                 TempData["Error"] = "Không tìm thấy chuyến bay để xóa.";
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        // ==========================================
+        // 7. THỐNG KÊ DOANH THU & TỒN KHO (Sửa lỗi GroupBy)
+        // ==========================================
+        public async Task<IActionResult> Dashboard()
+        {
+            // Tính toán các con số tổng quát
+            var totalRevenue = await _context.Bookings.SumAsync(b => b.TotalAmount);
+            var totalTickets = await _context.Bookings.CountAsync();
+            var totalAvailableSeats = await _context.Flights.SumAsync(f => f.AvailableSeats);
+
+            // SỬA LỖI TẠI ĐÂY: Lấy dữ liệu thô về List trước (Client-side)
+            var rawBookingData = await _context.Bookings
+                .Include(b => b.Flight)
+                .Select(b => new {
+                    FlightNum = b.Flight != null ? b.Flight.FlightNumber : "N/A",
+                    Amount = b.TotalAmount
+                })
+                .ToListAsync(); // Đưa dữ liệu từ SQL về RAM
+
+            // Sau đó mới thực hiện GroupBy trên bộ nhớ để vẽ biểu đồ
+            var flightStats = rawBookingData
+                .GroupBy(x => x.FlightNum)
+                .Select(g => new {
+                    Label = g.Key,
+                    Value = g.Sum(x => x.Amount)
+                })
+                .ToList();
+
+            // Truyền dữ liệu ra View
+            ViewBag.TotalRevenue = totalRevenue;
+            ViewBag.TotalTickets = totalTickets;
+            ViewBag.TotalSeats = totalAvailableSeats;
+            ViewBag.ChartLabels = flightStats.Select(x => x.Label).ToList();
+            ViewBag.ChartValues = flightStats.Select(x => x.Value).ToList();
+
+            return View();
         }
     }
 }
